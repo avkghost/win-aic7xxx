@@ -1,0 +1,201 @@
+; aic7xxx.inf — Adaptec AIC-7xxx SCSI StorPort Miniport Driver (Fast/Ultra/Ultra2/U160)
+;
+; Supports the full aic78xx family:
+;   AIC-785x/786x  — Fast SCSI (AHA-2902/2904/2910/2920C/2930C/2930CU, APA-1480A)
+;   AIC-787x       — Fast SCSI PCI (AHA-2940, 3940, 398X, 2944, 3944, 4944)
+;   AIC-788x       — Ultra SCSI (AHA-2940U, 3940U, 398XU, 2944U, 3944U, 4944U)
+;   AIC-7895       — Ultra Wide dual channel (AHA-2940UW Dual, 3940AU, 3944AU)
+;   AIC-7890/7896  — Ultra2 LVD (AHA-2940U2W/B, 2950U2B, 2930U2, 3950U2B/D, AAA-131U2)
+;   AIC-7892       — Ultra160 LVD (AHA-29160/N/C/B, 19160B, 2915-30LP)
+;   AIC-7899       — Ultra160 LVD dual channel (AHA-3960D)
+;
+; Copyright (c) 2026 Andrei Kazialetski. MIT License.
+
+[Version]
+Signature   = "$Windows NT$"
+Class       = SCSIAdapter
+ClassGUID   = {4D36E97B-E325-11CE-BFC1-08002BE10318}
+Provider    = %ManufacturerName%
+CatalogFile = aic7xxx.cat
+DriverVer   = 08/23/2026,1.0.1.0
+PnpLockdown = 1
+
+[SourceDisksNames]
+1 = %DiskDescription%,,,
+
+[SourceDisksFiles]
+aic7xxx.sys = 1
+
+[DestinationDirs]
+DefaultDestDir = 12  ; %windir%\system32\drivers
+
+; =========================================================================
+; Manufacturer and device models
+; =========================================================================
+
+[Manufacturer]
+%ManufacturerName% = AIC7xxx_Models,NTamd64
+
+[AIC7xxx_Models.NTamd64]
+; --- AIC-785x/786x (Fast SCSI, VEN_9004) ---
+%DeviceDesc_2902%   = AIC7xxx_Inst, PCI\VEN_9004&DEV_5078            ; AHA-2902/04/10/15/20C/30C
+%DeviceDesc_5578%   = AIC7xxx_Inst, PCI\VEN_9004&DEV_5578            ; AIC-7855
+%DeviceDesc_2930CU% = AIC7xxx_Inst, PCI\VEN_9004&DEV_3860            ; AHA-2930CU
+%DeviceDesc_1480A%  = AIC7xxx_Inst, PCI\VEN_9004&DEV_6075            ; APA-1480A CardBus
+%DeviceDesc_7860%   = AIC7xxx_Inst, PCI\VEN_9004&DEV_6078            ; AIC-7860
+%DeviceDesc_2940AU% = AIC7xxx_Inst, PCI\VEN_9004&DEV_6178            ; AHA-2940AU
+%DeviceDesc_2940AUCN%= AIC7xxx_Inst, PCI\VEN_9004&DEV_2178           ; AHA-2940AU/CN
+%DeviceDesc_2930C%  = AIC7xxx_Inst, PCI\VEN_9004&DEV_6038            ; AHA-2930C var
+
+; --- AIC-787x (Fast SCSI PCI, VEN_9004) ---
+%DeviceDesc_2940%   = AIC7xxx_Inst, PCI\VEN_9004&DEV_7178            ; AHA-2940
+%DeviceDesc_3940%   = AIC7xxx_Inst, PCI\VEN_9004&DEV_7278            ; AHA-3940
+%DeviceDesc_398X%   = AIC7xxx_Inst, PCI\VEN_9004&DEV_7378            ; AHA-398X
+%DeviceDesc_2944%   = AIC7xxx_Inst, PCI\VEN_9004&DEV_7478            ; AHA-2944
+%DeviceDesc_3944%   = AIC7xxx_Inst, PCI\VEN_9004&DEV_7578            ; AHA-3944
+%DeviceDesc_4944%   = AIC7xxx_Inst, PCI\VEN_9004&DEV_7678            ; AHA-4944
+%DeviceDesc_7870%   = AIC7xxx_Inst, PCI\VEN_9004&DEV_7078            ; AIC-7870
+
+; --- AIC-788x (Ultra SCSI, VEN_9004) ---
+%DeviceDesc_2940U%  = AIC7xxx_Inst, PCI\VEN_9004&DEV_8178            ; AHA-2940U/UW
+%DeviceDesc_3940U%  = AIC7xxx_Inst, PCI\VEN_9004&DEV_8278            ; AHA-3940U/UW
+%DeviceDesc_398XU%  = AIC7xxx_Inst, PCI\VEN_9004&DEV_8378            ; AHA-398XU
+%DeviceDesc_2944U%  = AIC7xxx_Inst, PCI\VEN_9004&DEV_8478            ; AHA-2944U
+%DeviceDesc_3944U%  = AIC7xxx_Inst, PCI\VEN_9004&DEV_8578            ; AHA-3944U
+%DeviceDesc_4944U%  = AIC7xxx_Inst, PCI\VEN_9004&DEV_8678            ; AHA-4944U
+%DeviceDesc_2930U%  = AIC7xxx_Inst, PCI\VEN_9004&DEV_8878            ; AHA-2930U
+%DeviceDesc_2940UP% = AIC7xxx_Inst, PCI\VEN_9004&DEV_8778            ; AHA-2940U Pro
+%DeviceDesc_2940UCN%= AIC7xxx_Inst, PCI\VEN_9004&DEV_0078            ; AHA-2940U/CN
+%DeviceDesc_7880%   = AIC7xxx_Inst, PCI\VEN_9004&DEV_8078            ; AIC-7880
+
+; --- AIC-7895 (Ultra WIDE dual channel, VEN_9004) ---
+%DeviceDesc_2940UD% = AIC7xxx_Inst, PCI\VEN_9004&DEV_7895            ; AHA-2940UW Dual / 3940AU / 3944AU
+%DeviceDesc_ARO1130%= AIC7xxx_Inst, PCI\VEN_9004&DEV_7890            ; ARO-1130
+
+; --- AIC-7890/7896 (Ultra2 LVD, VEN_9005) ---
+%DeviceDesc_2940U2W%= AIC7xxx_Inst, PCI\VEN_9005&DEV_0010            ; AHA-2940U2W/U2B/2950U2B
+%DeviceDesc_2930U2% = AIC7xxx_Inst, PCI\VEN_9005&DEV_0011            ; AHA-2930U2
+%DeviceDesc_AAA131% = AIC7xxx_Inst, PCI\VEN_9005&DEV_0013            ; AAA-131U2 / ARO-1130U2
+%DeviceDesc_7890%   = AIC7xxx_Inst, PCI\VEN_9005&DEV_001F            ; AIC-7890 generic
+%DeviceDesc_3950B%  = AIC7xxx_Inst, PCI\VEN_9005&DEV_0050            ; AHA-3950U2B
+%DeviceDesc_3950D%  = AIC7xxx_Inst, PCI\VEN_9005&DEV_0051            ; AHA-3950U2D
+%DeviceDesc_7896%   = AIC7xxx_Inst, PCI\VEN_9005&DEV_005F            ; AIC-7896 generic
+
+; --- AIC-7892 (Ultra160 LVD, VEN_9005) ---
+%DeviceDesc_29160%  = AIC7xxx_Inst, PCI\VEN_9005&DEV_0080            ; AHA-29160/29160N/C/B
+%DeviceDesc_19160%  = AIC7xxx_Inst, PCI\VEN_9005&DEV_0081            ; AHA-19160B
+%DeviceDesc_2915LP% = AIC7xxx_Inst, PCI\VEN_9005&DEV_0082            ; AHA-2915-30LP
+%DeviceDesc_7892%   = AIC7xxx_Inst, PCI\VEN_9005&DEV_008F            ; AIC-7892 generic
+
+; --- AIC-7899 (Ultra160 LVD dual channel, VEN_9005) ---
+%DeviceDesc_3960D%  = AIC7xxx_Inst, PCI\VEN_9005&DEV_00C0            ; AHA-3960D
+%DeviceDesc_7899%   = AIC7xxx_Inst, PCI\VEN_9005&DEV_00CF            ; AIC-7899 generic
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+; =========================================================================
+; Install sections
+; =========================================================================
+
+[AIC7xxx_Inst]
+CopyFiles = AIC7xxx_CopyFiles
+
+[AIC7xxx_CopyFiles]
+aic7xxx.sys,,,1
+
+; =========================================================================
+; Service registration
+; =========================================================================
+
+[AIC7xxx_Inst.Services]
+AddService = aic7xxx,%SPSVCINST_ASSOCSERVICE%,aic7xxx_Service
+
+[aic7xxx_Service]
+ServiceType   = %SERVICE_KERNEL_DRIVER%
+StartType     = %SERVICE_DEMAND_START%
+ErrorControl  = %SERVICE_ERROR_NORMAL%
+ServiceBinary = %12%\aic7xxx.sys
+LoadOrderGroup = SCSI Miniport
+
+; =========================================================================
+; Event log support
+; =========================================================================
+
+[AIC7xxx_EventLog_Inst]
+AddReg = AIC7xxx_EventLog_AddReg
+
+[AIC7xxx_EventLog_AddReg]
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\IoLogMsg.dll"
+HKR,,TypesSupported,%REG_DWORD%,7
+
+; =========================================================================
+; Strings
+; =========================================================================
+
+[Strings]
+ManufacturerName     = "Adaptec"
+DiskDescription      = "Adaptec AIC-7xxx SCSI Driver"
+
+; Fast SCSI (VEN_9004)
+DeviceDesc_2902      = "Adaptec AHA-2902/04/10/15/20C/30C SCSI Controller"
+DeviceDesc_5578      = "Adaptec AIC-7855 SCSI Controller"
+DeviceDesc_2930CU    = "Adaptec AHA-2930CU SCSI Controller"
+DeviceDesc_1480A     = "Adaptec APA-1480A CardBus SCSI Adapter"
+DeviceDesc_7860      = "Adaptec AIC-7860 SCSI Controller"
+DeviceDesc_2940AU    = "Adaptec AHA-2940AU SCSI Controller"
+DeviceDesc_2940AUCN  = "Adaptec AHA-2940AU/CN SCSI Controller"
+DeviceDesc_2930C     = "Adaptec AHA-2930C SCSI Controller"
+
+; Fast SCSI PCI (VEN_9004)
+DeviceDesc_2940      = "Adaptec AHA-2940 PCI SCSI Controller"
+DeviceDesc_3940      = "Adaptec AHA-3940 PCI SCSI Controller"
+DeviceDesc_398X      = "Adaptec AHA-398X PCI SCSI Controller"
+DeviceDesc_2944      = "Adaptec AHA-2944 PCI SCSI Controller"
+DeviceDesc_3944      = "Adaptec AHA-3944 PCI RAID Controller"
+DeviceDesc_4944      = "Adaptec AHA-4944 PCI RAID Controller"
+DeviceDesc_7870      = "Adaptec AIC-7870 SCSI Controller"
+
+; Ultra SCSI (VEN_9004)
+DeviceDesc_2940U     = "Adaptec AHA-2940U/UW Ultra SCSI Controller"
+DeviceDesc_3940U     = "Adaptec AHA-3940U/UW Ultra SCSI Controller"
+DeviceDesc_398XU     = "Adaptec AHA-398XU Ultra SCSI Controller"
+DeviceDesc_2944U     = "Adaptec AHA-2944U Ultra SCSI Controller"
+DeviceDesc_3944U     = "Adaptec AHA-3944U Ultra SCSI RAID Controller"
+DeviceDesc_4944U     = "Adaptec AHA-4944U Ultra SCSI RAID Controller"
+DeviceDesc_2930U     = "Adaptec AHA-2930U Ultra SCSI Controller"
+DeviceDesc_2940UP    = "Adaptec AHA-2940U/W Pro Ultra SCSI Controller"
+DeviceDesc_2940UCN   = "Adaptec AHA-2940U/CN Ultra SCSI Controller"
+DeviceDesc_7880      = "Adaptec AIC-7880 Ultra SCSI Controller"
+
+; Ultra WIDE (VEN_9004)
+DeviceDesc_2940UD    = "Adaptec AHA-2940UW Dual / 3940AU Ultra Wide SCSI Controller"
+DeviceDesc_ARO1130   = "Adaptec ARO-1130 PCI RAID Controller"
+
+; Ultra2 LVD (VEN_9005)
+DeviceDesc_2940U2W   = "Adaptec AHA-2940U2W/U2B/2950U2B Ultra2 SCSI Controller"
+DeviceDesc_2930U2    = "Adaptec AHA-2930U2 Ultra2 SCSI Controller"
+DeviceDesc_AAA131    = "Adaptec AAA-131U2 / ARO-1130U2 Ultra2 RAID Controller"
+DeviceDesc_7890      = "Adaptec AIC-7890 Ultra2 SCSI Controller"
+DeviceDesc_3950B     = "Adaptec AHA-3950U2B Ultra2 SCSI Controller"
+DeviceDesc_3950D     = "Adaptec AHA-3950U2D Dual Ultra2 SCSI Controller"
+DeviceDesc_7896      = "Adaptec AIC-7896 Dual Ultra2 SCSI Controller"
+
+; Ultra160 LVD (VEN_9005)
+DeviceDesc_29160     = "Adaptec AHA-29160 Ultra160 SCSI Controller"
+DeviceDesc_19160     = "Adaptec AHA-19160B Ultra160 SCSI Controller"
+DeviceDesc_2915LP    = "Adaptec AHA-2915-30LP Low Profile Ultra160 SCSI Controller"
+DeviceDesc_7892      = "Adaptec AIC-7892 Ultra160 SCSI Controller"
+
+; Ultra160 LVD dual channel (VEN_9005)
+DeviceDesc_3960D     = "Adaptec AHA-3960D Dual Ultra160 SCSI Controller"
+DeviceDesc_7899      = "Adaptec AIC-7899 Dual Ultra160 SCSI Controller"
+
+; Service constants
+SPSVCINST_ASSOCSERVICE = 0x00000002
+SERVICE_KERNEL_DRIVER  = 1
+SERVICE_BOOT_START     = 0
+SERVICE_DEMAND_START   = 3
+SERVICE_ERROR_NORMAL   = 1
+REG_EXPAND_SZ          = 0x00020000
+REG_DWORD              = 0x00010001

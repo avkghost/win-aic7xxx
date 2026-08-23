@@ -1,0 +1,2 @@
+; dirs file for AIC7xxx driver build
+DIRS=aic79xx aic7xxx

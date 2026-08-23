@@ -1,0 +1,16 @@
+; ddk_ntoskrnl.def — Import library definitions for NTOSKRNL.exe
+; Kernel functions consumed by aic7xxx.sys
+;
+; Copyright (c) 2026 Andrei Kazialetski. MIT License.
+
+LIBRARY NTOSKRNL.exe
+EXPORTS
+    DbgPrint
+    ExAllocatePoolWithTag
+    ExFreePoolWithTag
+    KeAcquireSpinLockRaiseToDpc
+    KeBugCheckEx
+    KeReleaseSpinLock
+    RtlInitUnicodeString
+    RtlWriteRegistryValue
+    memcpy

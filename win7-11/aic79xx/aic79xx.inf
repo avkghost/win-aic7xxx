@@ -1,0 +1,125 @@
+; aic79xx.inf — Adaptec AIC-79xx Ultra320 SCSI StorPort Miniport Driver
+;
+; Supports:
+;   AIC-7901  — single channel U320 PCIe (ASC-29320LPE, ASC-29320ALP)
+;   AIC-7902  — dual channel U320 PCI-X (ASC-29320, ASC-29320B, ASC-39320, etc.)
+;   AIC-7901A — single channel U320 PCI-X (ASC-29320LP)
+;
+; Copyright (c) 2026 Andrei Kazialetski. MIT License.
+
+[Version]
+Signature   = "$Windows NT$"
+Class       = SCSIAdapter
+ClassGUID   = {4D36E97B-E325-11CE-BFC1-08002BE10318}
+Provider    = %ManufacturerName%
+CatalogFile = aic79xx.cat
+DriverVer   = 08/23/2026,1.0.1.0
+PnpLockdown = 1
+
+[SourceDisksNames]
+1 = %DiskDescription%,,,
+
+[SourceDisksFiles]
+aic79xx.sys = 1
+
+[DestinationDirs]
+DefaultDestDir = 12  ; %windir%\system32\drivers
+
+; =========================================================================
+; Manufacturer and device models
+; =========================================================================
+
+[Manufacturer]
+%ManufacturerName% = AIC79xx_Models,NTamd64
+
+[AIC79xx_Models.NTamd64]
+; --- AIC-7901 (single channel, PCIe) ---
+%DeviceDesc_LPE%  = AIC79xx_Inst, PCI\VEN_9005&DEV_8017&SUBSYS_00459005  ; ASC-29320LPE
+%DeviceDesc_ALP%  = AIC79xx_Inst, PCI\VEN_9005&DEV_8017&SUBSYS_00449005  ; ASC-29320ALP
+%DeviceDesc_7901% = AIC79xx_Inst, PCI\VEN_9005&DEV_8017                   ; generic 7901 fallback
+
+; --- AIC-7901A (single channel, PCI-X) ---
+%DeviceDesc_LP%   = AIC79xx_Inst, PCI\VEN_9005&DEV_8014&SUBSYS_00449005  ; ASC-29320LP
+%DeviceDesc_7901A%= AIC79xx_Inst, PCI\VEN_9005&DEV_8014                   ; generic 7901A fallback
+
+; --- AIC-7902 (dual channel, PCI-X) ---
+%DeviceDesc_29320%  = AIC79xx_Inst, PCI\VEN_9005&DEV_8012&SUBSYS_00429005 ; ASC-29320
+%DeviceDesc_29320B% = AIC79xx_Inst, PCI\VEN_9005&DEV_8013&SUBSYS_00439005 ; ASC-29320B
+%DeviceDesc_29320A% = AIC79xx_Inst, PCI\VEN_9005&DEV_8000&SUBSYS_00609005 ; ASC-29320A
+%DeviceDesc_39320%  = AIC79xx_Inst, PCI\VEN_9005&DEV_8010&SUBSYS_00409005 ; ASC-39320
+%DeviceDesc_39320A% = AIC79xx_Inst, PCI\VEN_9005&DEV_8016&SUBSYS_00409005 ; ASC-39320A
+%DeviceDesc_39320D% = AIC79xx_Inst, PCI\VEN_9005&DEV_8011&SUBSYS_00419005 ; ASC-39320D
+%DeviceDesc_7902%   = AIC79xx_Inst, PCI\VEN_9005&DEV_801F                 ; generic 7902 fallback
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+; =========================================================================
+; Install sections
+; =========================================================================
+
+[AIC79xx_Inst]
+CopyFiles = AIC79xx_CopyFiles
+
+[AIC79xx_CopyFiles]
+aic79xx.sys,,,1
+
+; =========================================================================
+; Service registration
+; =========================================================================
+
+[AIC79xx_Inst.Services]
+AddService = aic79xx,%SPSVCINST_ASSOCSERVICE%,aic79xx_Service
+
+[aic79xx_Service]
+ServiceType   = %SERVICE_KERNEL_DRIVER%
+StartType     = %SERVICE_DEMAND_START%
+ErrorControl  = %SERVICE_ERROR_NORMAL%
+ServiceBinary = %12%\aic79xx.sys
+LoadOrderGroup = SCSI Miniport
+
+; =========================================================================
+; Event log support
+; =========================================================================
+
+[AIC79xx_EventLog_Inst]
+AddReg = AIC79xx_EventLog_AddReg
+
+[AIC79xx_EventLog_AddReg]
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\IoLogMsg.dll"
+HKR,,TypesSupported,%REG_DWORD%,7
+
+; =========================================================================
+; Strings
+; =========================================================================
+
+[Strings]
+ManufacturerName     = "Adaptec"
+DiskDescription      = "Adaptec AIC-79xx SCSI Driver"
+
+; AIC-7901 (PCIe)
+DeviceDesc_LPE       = "Adaptec ASC-29320LPE Ultra320 SCSI Controller"
+DeviceDesc_ALP       = "Adaptec ASC-29320ALP Ultra320 SCSI Controller"
+DeviceDesc_7901      = "Adaptec AIC-7901 Ultra320 SCSI Controller"
+
+; AIC-7901A (PCI-X)
+DeviceDesc_LP        = "Adaptec ASC-29320LP Ultra320 SCSI Controller"
+DeviceDesc_7901A     = "Adaptec AIC-7901A Ultra320 SCSI Controller"
+
+; AIC-7902 (dual channel)
+DeviceDesc_29320     = "Adaptec ASC-29320 Ultra320 SCSI Controller"
+DeviceDesc_29320B    = "Adaptec ASC-29320B Ultra320 SCSI Controller"
+DeviceDesc_29320A    = "Adaptec ASC-29320A Ultra320 SCSI Controller"
+DeviceDesc_39320     = "Adaptec ASC-39320 Dual Ultra320 SCSI Controller"
+DeviceDesc_39320A    = "Adaptec ASC-39320A Dual Ultra320 SCSI Controller"
+DeviceDesc_39320D    = "Adaptec ASC-39320D Dual Ultra320 SCSI Controller"
+DeviceDesc_7902      = "Adaptec AIC-7902 Ultra320 SCSI Controller"
+
+; Service constants
+SPSVCINST_ASSOCSERVICE = 0x00000002
+SERVICE_KERNEL_DRIVER  = 1
+SERVICE_BOOT_START     = 0
+SERVICE_DEMAND_START   = 3
+SERVICE_ERROR_NORMAL   = 1
+REG_EXPAND_SZ          = 0x00020000
+REG_DWORD              = 0x00010001

@@ -1,0 +1,43 @@
+; AIC79xx StorPort Miniport Driver - Legacy WDK Build
+; Use with WDK 7 build environment (build.exe -cZg)
+;
+; Copyright (c) 2026. MIT License.
+
+TARGETNAME=aic79xx
+TARGETPATH=obj
+TARGETTYPE=MINIPORT
+
+# StorPort miniport driver
+TARGETLIBS=$(DDK_LIB_PATH)\storport.lib
+
+INCLUDES=$(DDK_INC_PATH)
+
+# Sources
+TARGET_SOURCES= \
+    aic79xx_storport.c \
+    aic79xx_core.c \
+    aic79xx_pci.c \
+    aic79xx.rc
+
+TARGET_INCLUDES= \
+    $(TARGETDIR)
+
+# Preprocessor definitions
+C_DEFINES=$(C_DEFINES) /D_UNICODE /DUNICODE
+
+# Warning level 4, treat warnings as non-fatal
+MSC_WARNING_LEVEL=/W4
+
+# Disable specific warnings from Linux code:
+#   4201: nonstandard extension: nameless struct/union
+#   4213: nonstandard extension: void cast on lvalue
+#   4214: nonstandard extension: bitfield other than int
+#   4100: unreferenced formal parameter
+#   4127: conditional expression is constant
+#   4701: potentially uninitialized local variable
+#   4706: assignment within conditional expression
+#   4996: deprecated functions (sprintf, etc.)
+MSC_COMPILER_FLAGS=/wd4201 /wd4213 /wd4214 /wd4100 /wd4127 /wd4701 /wd4706 /wd4996
+
+# Include the INF file for driver installation
+INF_FILE=aic79xx.inf

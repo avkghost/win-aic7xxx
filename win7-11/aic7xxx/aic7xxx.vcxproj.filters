@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Linux Core (unmodified)">
+      <UniqueIdentifier>{B1C2D3E4-F5A6-7890-ABCD-EF1234567890}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\OSM Shim">
+      <UniqueIdentifier>{C1D2E3F4-A5B6-7890-ABCD-EF1234567891}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Compat">
+      <UniqueIdentifier>{D1E2F3A4-B5C6-7890-ABCD-EF1234567892}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="aic7xxx_storport.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="aic7xxx_core.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="aic7xxx_pci.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="aic7xxx_93cx6.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ResourceCompile Include="aic7xxx.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="aic7xxx_osm.h">
+      <Filter>Header Files\OSM Shim</Filter>
+    </ClInclude>
+    <ClInclude Include="aic7xxx_win.h">
+      <Filter>Header Files\OSM Shim</Filter>
+    </ClInclude>
+    <ClInclude Include="aic7xxx_inline.h">
+      <Filter>Header Files\OSM Shim</Filter>
+    </ClInclude>
+    <ClInclude Include="aic7xxx.h">
+      <Filter>Header Files\Linux Core (unmodified)</Filter>
+    </ClInclude>
+    <ClInclude Include="aic7xxx_reg.h">
+      <Filter>Header Files\Linux Core (unmodified)</Filter>
+    </ClInclude>
+    <ClInclude Include="aic7xxx_pci.h">
+      <Filter>Header Files\Linux Core (unmodified)</Filter>
+    </ClInclude>
+    <ClInclude Include="aic7xxx_seq.h">
+      <Filter>Header Files\Linux Core (unmodified)</Filter>
+    </ClInclude>
+    <ClInclude Include="aic7xxx_93cx6.h">
+      <Filter>Header Files\Linux Core (unmodified)</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\ahc_osm_common.h">
+      <Filter>Header Files\Compat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\queue.h">
+      <Filter>Header Files\Compat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\compat\storport.h">
+      <Filter>Header Files\Compat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\compat\srb.h">
+      <Filter>Header Files\Compat</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Inf Include="aic7xxx.inf" />
+  </ItemGroup>
+</Project>

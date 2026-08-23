@@ -1,0 +1,26 @@
+; ddk_storport.def — Import library definitions for storport.sys
+; Functions consumed by aic7xxx.sys StorPort miniport driver
+;
+; Copyright (c) 2026 Andrei Kazialetski. MIT License.
+
+LIBRARY storport.sys
+EXPORTS
+    StorPortBusy
+    StorPortCompleteRequest
+    StorPortFreeDeviceBase
+    StorPortGetBusData
+    StorPortGetDeviceBase
+    StorPortGetLogicalUnit
+    StorPortGetPhysicalAddress
+    StorPortGetScatterGatherList
+    StorPortGetUncachedExtension
+    StorPortInitialize
+    StorPortNotification
+    StorPortPauseDevice
+    StorPortReady
+    StorPortResumeDevice
+    StorPortSetBusDataByOffset
+    StorPortSetDeviceQueueDepth
+    StorPortStallExecution
+    StorPortLogError
+    StorPortMoveMemory

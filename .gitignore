@@ -1,0 +1,45 @@
+# Build artifacts
+*.o
+*.a
+*.sys
+*.dll
+*.lib
+*.exp
+*.pdb
+
+# aicasm generated files (win7-11/common/aicasm)
+aicasm
+/win7-11/common/aicasm/aicdb.h
+/win7-11/common/aicasm/aicasm_gram.c
+/win7-11/common/aicasm/aicasm_gram.h
+/win7-11/common/aicasm/aicasm_macro_gram.c
+/win7-11/common/aicasm/aicasm_macro_gram.h
+/win7-11/common/aicasm/aicasm_scan.c
+/win7-11/common/aicasm/aicasm_macro_scan.c
+
+# Editor/IDE
+.vs/
+*.user
+*.suo
+
+# Root-level Linux source files (kept locally, not tracked)
+/aic79xx.h
+/aic79xx_core.c
+/aic79xx_inline.h
+/aic79xx_osm.c
+/aic79xx_osm.h
+/aic79xx_pci.c
+/aic79xx_pci.h
+/aic79xx_reg.h_shipped
+/aic79xx_seq.h_shipped
+/aic7xxx.h
+/aic7xxx_93cx6.c
+/aic7xxx_93cx6.h
+/aic7xxx_core.c
+/aic7xxx_inline.h
+/aic7xxx_osm.c
+/aic7xxx_osm.h
+/aic7xxx_pci.c
+/aic7xxx_pci.h
+/aic7xxx_reg.h_shipped
+/aic7xxx_seq.h_shipped
