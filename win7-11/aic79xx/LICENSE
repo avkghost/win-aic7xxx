@@ -24,10 +24,10 @@ SOFTWARE.
 
 This license applies to the Windows StorPort adaptation layer only:
   aic79xx_storport.c, aic79xx_osm.h, aic79xx_win.h, aic79xx_inline.h,
-  aic7xxx.inf, Makefile, ddk_storport.def, ddk_ntoskrnl.def, ddk_exports.def.
+  aic79xx.inf, Makefile, ../common/ddk_storport.def, ../common/ddk_ntoskrnl.def.
 
 The Linux-origin files retain their original BSD/GPL dual license:
   aic79xx_core.c, aic79xx.h, aic79xx_pci.c, aic79xx_pci.h,
-  aic79xx_seq.h, aic79xx_reg.h, aicasm/aicasm_insformat.h, queue.h.
+  aic79xx_seq.h, aic79xx_reg.h, ../common/aicasm/aicasm_insformat.h, ../common/queue.h.
 
 See doc/PORTING.md for full licensing details.

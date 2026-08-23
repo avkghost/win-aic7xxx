@@ -8,7 +8,7 @@
 *.pdb
 
 # aicasm generated files (win7-11/common/aicasm)
-aicasm
+/win7-11/common/aicasm/aicasm
 /win7-11/common/aicasm/aicdb.h
 /win7-11/common/aicasm/aicasm_gram.c
 /win7-11/common/aicasm/aicasm_gram.h

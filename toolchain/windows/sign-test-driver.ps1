@@ -1,3 +1,5 @@
+# Copyright (c) 2026 Andrei Kazialetski. MIT License.
+#
 # sign-test-driver.ps1 — Self-sign and install aic79xx/aic7xxx test drivers
 #
 # Usage:

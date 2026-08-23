@@ -1,3 +1,5 @@
+# Copyright (c) 2026 Andrei Kazialetski. MIT License.
+#
 # toolchain/Dockerfile — Reproducible build environment for aic7xxx.sys / aic79xx.sys
 #
 # Usage:
